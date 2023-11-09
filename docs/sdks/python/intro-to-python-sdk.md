@@ -1,5 +1,10 @@
+---
+sidebar_position: 1
+---
 
 # Orkes Conductor Python SDK
+
+**TO DO - Add an intro to the main page (LanguagesSection component). [Olivier]**
 
 Orkes Conductor Python SDK is maintained here: https://github.com/conductor-sdk/conductor-python
 

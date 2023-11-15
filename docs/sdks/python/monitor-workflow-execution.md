@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Monitor Execution
+# Monitoring Workflow Execution
 
 ## Get workflow details incl. Task outputs and logs
 

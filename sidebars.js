@@ -124,7 +124,7 @@ const sidebars = {
                     link: {
                         type: 'generated-index',
                         title: 'Python',
-                        description: 'SDK Documentation for Python',
+                        description: 'SDK Documentation for Python. To Do - Intro [Olivier].',
                         slug: '/sdks/python',
                         keywords: ['sdks','python']
                     },

@@ -13,7 +13,7 @@ The workflow is now running. Let's explore the SDKs for sending signals to contr
 To pause your running worklow, use the following SDK:
 
 ```python
-WorkflowResourceApi.pause_workflow1(self, workflow_id, **kwargs)
+workflow_client.pauseWorkflow(workflow_id)
 ```
 
 Replace **workflow_id** with the workflow ID of the execution to be paused.
@@ -23,7 +23,7 @@ Replace **workflow_id** with the workflow ID of the execution to be paused.
 To resume your paused worklow, use the following SDK:
 
 ```python
-WorkflowResourceApi.resume_workflow1(self, workflow_id, **kwargs)
+workflow_client.resumeWorkflow(workflow_id)
 ```
 
 Replace **workflow_id** with the workflow ID of the paused execution.
@@ -33,7 +33,7 @@ Replace **workflow_id** with the workflow ID of the paused execution.
 Use the following SDK to restart your running workflow:
 
 ```python
-WorkflowResourceApi.restart1(self, workflow_id, **kwargs)
+workflow_client.restartWorkflow(workflow_id, useLatestDef=True)
 ```
 Replace **workflow_id** with the execution ID of the workflow.
 
@@ -52,5 +52,5 @@ Replace **workflow_id** with the execution ID of the workflow.
 Use the following SDK with the workflowId as the parameter to terminate your running workflow:
 
 ```python
-TaskResourceApi.log(body, task_id, **kwargs)
+workflow_client.terminateWorkflow(workflow_id, "Termination reason")
 ```

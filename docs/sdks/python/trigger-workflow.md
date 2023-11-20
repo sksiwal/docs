@@ -14,7 +14,7 @@ The following command starts a workflow and waits until the workflow completes o
 wfInput = { "a" : 5, "b": "+", "c" : [7, 8] }
 requestId = "request_id"
 version = 1
-waitUntilTaskRef = "simple_task_ref" # Optional
+waitUntilTaskRef = "task_ref_name" # Optional
 workflow_id = workflow_client.executeWorkflow(
     startWorkflowRequest, requestId, "WORKFLOW_NAME", version, waitUntilTaskRef
 )

@@ -4,9 +4,18 @@ sidebar_position: 4
 
 # Trigger a workflow
 
-## Trigger asynchronously
+This SDK documentation provides guidance on triggering workflows using both synchronous and asynchronous approaches.
 
-### Start using StartWorkflowRequest
+## Triggering a Workflow Asynchronously
+
+To initiate a workflow asynchronously, follow these steps using the ***StartWorkflowRequest***:
+
+1. Create a ConductorWorkflow instance.
+2. Define input parameters.
+3. Add tasks to the workflow.
+4. Obtain the workflow definition.
+5. Create a StartWorkflowRequest.
+6. Start the workflow and retrieve the workflow ID.
 
 ```python
 workflow = ConductorWorkflow(
@@ -28,16 +37,16 @@ startWorkflowRequest = StartWorkflowRequest(
 workflow_id = workflow_client.startWorkflow(startWorkflowRequest)
 ```
 
-### Start using Workflow Name
+To trigger a workflow using its name, use the following approach:
 
 ```python
 wfInput = { "a" : 5, "b": "+", "c" : [7, 8] }
 workflow_id = workflow_client.startWorkflowByName("WORKFLOW_NAME", wfInput)
 ```
 
-## Trigger synchronous
+## Triggering a Workflow Synchronously
 
-The following command starts a workflow and waits until the workflow completes or the *waitUntilTask* completes.
+Initiate a workflow synchronously using the ***executeWorkflow*** method:
 
 ```python
 wfInput = { "a" : 5, "b": "+", "c" : [7, 8] }
@@ -48,3 +57,5 @@ workflow_id = workflow_client.executeWorkflow(
     startWorkflowRequest, requestId, "WORKFLOW_NAME", version, waitUntilTaskRef
 )
 ```
+
+This command starts a workflow and waits until the workflow completes or the specified task *waitUntilTask* completes.

@@ -6,11 +6,11 @@ import TabItem from '@theme/TabItem';
 
 # Send Signals to Workflow
 
-The workflow is now running. Let's explore the SDKs for sending signals to control the execution of the workflow.
+This section details the SDK methods for sending signals to control the execution of a running workflow. Explore the capabilities to pause, resume, restart, rerun, and terminate workflows as needed.
 
 ## Pause Workflow
 
-To pause your running worklow, use the following SDK:
+To temporarily pause a running workflow, use the following SDK:
 
 ```python
 workflow_client.pauseWorkflow(workflow_id)
@@ -20,7 +20,7 @@ Replace **workflow_id** with the workflow ID of the execution to be paused.
 
 ## Resume Workflow
 
-To resume your paused worklow, use the following SDK:
+To resume a paused workflow, use the following SDK:
 
 ```python
 workflow_client.resumeWorkflow(workflow_id)
@@ -30,16 +30,16 @@ Replace **workflow_id** with the workflow ID of the paused execution.
 
 ## Restart Workflow
 
-Use the following SDK to restart your running workflow:
+Restart a running workflow using the following SDK:
 
 ```python
 workflow_client.restartWorkflow(workflow_id, useLatestDef=True)
 ```
-Replace **workflow_id** with the execution ID of the workflow.
+Replace **workflow_id** with the execution ID of the workflow. The **useLatestDef** parameter allows you to restart the workflow with the latest definitions.
 
 ## Re-run Workflow
 
-The restart option restarts the workflow with either the current or latest definitions. However, if you want to run a new instance of the workflow by making changes to the workflow inputs, correlation ID, or task to domain mapping, you can utilize the rerun option.
+If you want to run a new instance of the workflow with changes to inputs, correlation ID, or task to domain mapping, utilize the rerun option:
 
 ```python
 WorkflowResourceApi.rerun(self, body, workflow_id, **kwargs)
@@ -49,8 +49,10 @@ Replace **workflow_id** with the execution ID of the workflow.
 
 ## Terminate Workflow
 
-Use the following SDK with the workflowId as the parameter to terminate your running workflow:
+To forcefully terminate a running workflow, use the following SDK with the workflow ID and termination reason as parameters:
 
 ```python
 workflow_client.terminateWorkflow(workflow_id, "Termination reason")
 ```
+
+These SDK methods provide flexibility in managing workflow execution, allowing you to adapt and control the flow as needed.

@@ -1,118 +1,19 @@
 ---
-sidebar_position: 9 
+sidebar_position: 11
 ---
 
-# Advanced Workflow Management
+# Write unit and integration tests for your workflows
 
-## Schedule a workflow to run periodically
+This section provides guidance on writing unit and integration tests for workflows using the `testWorkflow` method. Learn how to configure and execute workflow tests, capture and verify inputs and outputs, and ensure the successful completion of the workflow.
 
-### Scheduler Client
+## Steps
 
-### Initialization
-```python
-from conductor.client.configuration.configuration import Configuration
-from conductor.client.configuration.settings.authentication_settings import AuthenticationSettings
-from conductor.client.orkes.scheduler_client import SchedulerClient
+1. **Unit Test Configuration** - Configure the test environment by setting up the necessary parameters, such as server API URL, authentication settings, and workflow definitions.
+2. **Unit Test Execution** - Execute a unit test for a workflow using the `testWorkflow` method. Provide the workflow definition, input data, and any additional parameters.
+3. **Assertion Checks** - Perform assertion checks to ensure the successful execution of the workflow and validate inputs, outputs, and task details.
+4. Adjust the assertion checks based on the specific tasks and workflow logic being tested.
 
-configuration = Configuration(
-    server_api_url=SERVER_API_URL,
-    debug=False,
-    authentication_settings=AuthenticationSettings(
-        key_id=KEY_ID,
-        key_secret=KEY_SECRET
-    ),
-)
 
-scheduler_client = SchedulerClient(configuration)
-```
-
-### Saving Schedule
-```python
-from conductor.client.http.models.save_schedule_request import SaveScheduleRequest
-from conductor.client.http.models.start_workflow_request import StartWorkflowRequest
-
-startWorkflowRequest = StartWorkflowRequest(
-    name="WORKFLOW_NAME", workflow_def=workflowDef
-)
-saveScheduleRequest = SaveScheduleRequest(
-    name="SCHEDULE_NAME",
-    start_workflow_request=startWorkflowRequest,
-    cron_expression= "0 */5 * ? * *"
-)
-
-scheduler_client.saveSchedule(saveScheduleRequest)
-```
-
-### Get Schedule
-
-#### Get a specific schedule
-```python
-scheduler_client.getSchedule("SCHEDULE_NAME")
-```
-
-#### Get all schedules
-```python
-scheduler_client.getAllSchedules()
-```
-
-#### Get all schedules for a workflow
-```python
-scheduler_client.getAllSchedules("WORKFLOW_NAME")
-```
-
-### Delete Schedule
-```python
-scheduler_client.deleteSchedule("SCHEDULE_NAME")
-```
-
-#### Pause a schedule
-```python
-scheduler_client.pauseSchedule("SCHEDULE_NAME")
-```
-
-#### Pause all schedules
-```python
-scheduler_client.pauseAllSchedules()
-```
-
-#### Resume a scheduler
-```python
-scheduler_client.resumeSchedule("SCHEDULE_NAME")
-```
-
-#### Resume all schedules
-```python
-scheduler_client.resumeAllSchedules()
-```
-
-#### Set scheduler tags
-```python
-from conductor.client.orkes.models.metadata_tag import MetadataTag
-
-tags = [
-    MetadataTag("sch_tag", "val"), MetadataTag("sch_tag_2", "val2")
-]
-scheduler_client.setSchedulerTags(tags, "SCHEDULE_NAME")
-```
-
-#### Get scheduler tags
-```python
-tags = scheduler_client.getSchedulerTags("SCHEDULE_NAME")
-```
-
-#### Delete scheduler tags
-```python
-tags = [
-    MetadataTag("sch_tag", "val"), MetadataTag("sch_tag_2", "val2")
-]
-scheduler_client.deleteSchedulerTags(tags, "SCHEDULE_NAME")
-```
-
-## Write unit and integration tests for your workflows
-
-You can unit test your workflow on a remote server by using the testWorkflow method.
-
-Here's the python code for a sample unit test:
 
 ```python
 import json

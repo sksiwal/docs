@@ -4,15 +4,11 @@ sidebar_position: 8
 
 # Workers (Simple Tasks)
 
-Currently, there are three ways of writing a Python worker:
-1. [Worker as a function](#worker-as-a-function)
-2. [Worker as a class](#worker-as-a-class)
-3. [Worker as an annotation](#worker-as-an-annotation)
+This section provides guidance on writing Python workers for simple tasks in three different styles: as a function, as a class, or as an annotation. Additionally, it covers running these workers using the TaskHandler and provides examples for each style.
 
+## Worker as a Function
 
-## Worker as a function
-
-The function should follow this signature:
+A Python worker can be implemented as a function using the following signature:
 
 ```python
 ExecuteTaskFunction = Callable[
@@ -29,7 +25,7 @@ In other words:
 * Output must be either a `TaskResult` or an `object`
     * If it isn't a `TaskResult`, the assumption is - you're expecting to use the object as the `TaskResult.output_data`
 
-Quick example below:
+**Example:**
 
 ```python
 from conductor.client.http.models import Task, TaskResult
@@ -48,9 +44,11 @@ def execute(task: Task) -> TaskResult:
 
 If you like more details, you can look at all possible combinations of workers [here](https://github.com/conductor-sdk/conductor-python/blob/main/tests/integration/resources/worker/python/python_worker.py).
 
-## Worker as a class
+## Worker as a Class
 
-The class must implement `WorkerInterface` class, which requires an `execute` method. The remaining ones are inherited but can be easily overridden. Example with a custom polling interval:
+Implement a worker as a class by extending the `WorkerInterface` class and providing the required `execute` method.
+
+**Example:**
 
 ```python
 from conductor.client.http.models import Task, TaskResult
@@ -71,15 +69,17 @@ class SimplePythonWorker(WorkerInterface):
         return 0.5
 ```
 
-## Worker as an annotation
-A worker can also be invoked by adding a WorkerTask decorator, as shown in the below example.
-As long as the annotated worker is in any file inside the root folder of your worker application, it will be picked up by the TaskHandler, see [Run Workers](#run-workers).
+## Worker as an Annotation
+
+A worker can also be invoked by adding a `WorkerTask` decorator. Annotated workers are picked up by the `TaskHandler` during execution.
 
 The arguments that can be passed when defining the decorated worker are:
-1. task_definition_name: The definition of the conductor task that needs to be polled for.
-2. domain: Optional routing domain of the worker to execute tasks with a specific domain
-3. worker_id: An optional worker id used to identify the polling worker
-4. poll_interval: Polling interval in seconds. Defaulted to 1 second if not passed.
+1. **task_definition_name**: The definition of the conductor task that needs to be polled for.
+2. **domain**: Optional routing domain of the worker to execute tasks with a specific domain
+3. **worker_id**: An optional worker id used to identify the polling worker
+4. **poll_interval**: Polling interval in seconds. Defaulted to 1 second if not passed.
+
+**Example:**
 
 ```python
 from conductor.client.worker.worker_task import WorkerTask
@@ -91,7 +91,7 @@ def python_annotated_task(input) -> object:
 
 ## Run Workers
 
-Now you can run your workers by calling a `TaskHandler`, example:
+To run the workers, use the `TaskHandler` and configure it with the necessary settings.
 
 ```python
 from conductor.client.configuration.settings.authentication_settings import AuthenticationSettings
@@ -135,12 +135,13 @@ with TaskHandler(workers, configuration, scan_for_annotated_workers=True) as tas
     task_handler.join_processes()
 ```
 
-If you paste the above code in a file called main.py, you can launch the workers by running:
+To launch the workers, create a file (e.g., `main.py`) and run:
+
 ```shell
 python3 main.py
 ```
 
-If you're looking for better performance (i.e., more workers of the same type) - you can simply append more instances of the same worker like this:
+For better performance with multiple workers of the same type, append more instances of the same worker to the workers list like this:
 
 ```python
 workers = [

@@ -23,5 +23,3 @@ Use the following SDK to get the task logs, by providing the task_id:
 ```python
 taskLogs = task_client.getTaskLogs("task_id")
 ```
-
-## Monitor Status

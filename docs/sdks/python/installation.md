@@ -4,9 +4,11 @@ sidebar_position: 1
 
 # Installation & Setup
 
-Orkes Conductor Python SDK is maintained here: https://github.com/conductor-sdk/conductor-python.
+The Orkes Conductor Python SDK is available on GitHub at https://github.com/conductor-sdk/conductor-python. 
 
-## Get Conductor Python SDK
+## Installation
+
+You can install it using pip:
 
 ```shell
 python3 -m pip install conductor-python
@@ -14,7 +16,7 @@ python3 -m pip install conductor-python
 
 ## Initialization
 
-Everything related to server settings should be done within the `Configuration` class by setting the required parameter (when initializing an object) like this:
+All server-related configurations are managed through the *Configuration* class during the initialization of an object. Use the following template:
 
 ```python
 configuration = Configuration(
@@ -23,12 +25,16 @@ configuration = Configuration(
 )
 ```
 
-* server_api_url: Conductor server address. If you are running the server locally on port `8080`, this would be `http://localhost:8080/api`
-* debug: `true` for verbose logging `false` to display only the errors
+### Configuration Parameters:
+
+* **server_api_url**: The Conductor server address. For a local server on port 8080, use http://localhost:8080/api.
+* **debug**: Set to True for verbose logging, or False to display only errors.
 
 ### Authentication Settings (Optional)
 
-See [Security via Applications](/content/access-control-and-security/applications#generating-access-keys) or this [video](/content/how-to-videos/access-key-and-secret) for details on how to get an access key and secret.
+To enable secure access, you may configure authentication settings using an access key and secret. Obtain these credentials through the [Security via Applications](/content/access-control-and-security/applications#generating-access-keys) process or refer to the [video guide](/content/how-to-videos/access-key-and-secret) on Getting Access Key and Secret for detailed instructions.
+
+#### Example Authentication Configuration:
 
 Once we have a key and secret, we can configure the app from properties or environment variables, as shown in this example:
 
@@ -41,7 +47,7 @@ configuration = Configuration(
 )
 ```
 
-Remember to protect your app secrets like any other secrets or passwords.
+Remember to treat your application secrets with the same level of security as passwords.
 
 ## Related Topics
 

@@ -108,10 +108,6 @@ tags = [
 scheduler_client.deleteSchedulerTags(tags, "SCHEDULE_NAME")
 ```
 
-## Wait for a specific time / duration in a workflow
-
-## Trigger a workflow based on an event
-
 ## Write unit and integration tests for your workflows
 
 You can unit test your workflow on a remote server by using the testWorkflow method.
